@@ -1,0 +1,146 @@
+import webbrowser
+import os
+
+html_code = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Apology Letter</title>
+    <style>
+        :root{
+            --bg: #fdfaf6;
+            --text: #333;
+            --accent: #5b7c6f;
+        }
+        html,body{
+            height:100%;
+            margin:0;
+            padding:0;
+        }
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            background: var(--bg);
+            color: var(--text);
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:flex-start;
+            padding:56px 32px;
+            line-height:1.7;
+            -webkit-font-smoothing:antialiased;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 36px;
+            letter-spacing: 0.2px;
+        }
+
+        .scroll-down {
+            font-size: 48px;
+            margin: 34px 0;
+            cursor: pointer;
+            user-select: none;
+            animation: bounce 1.6s infinite;
+            color: var(--accent);
+        }
+        @keyframes bounce {
+            0%,20%,50%,80%,100% { transform: translateY(0); }
+            40% { transform: translateY(10px); }
+            60% { transform: translateY(6px); }
+        }
+
+        /* Place the letter below the fold visually */
+        .letter {
+            width: 100%;
+            max-width: 680px;
+            background: rgba(255,255,255,0.6);
+            padding: 28px 36px;
+            margin: 12vh auto 8vh auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(50,50,60,0.08);
+            font-size: 18px;
+            text-align: left;
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 600ms ease, transform 600ms ease;
+        }
+
+        .letter.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .letter p {
+            margin: 12px 0;
+        }
+
+        .letter .signature {
+            margin-top: 18px;
+            font-weight: 600;
+        }
+
+        footer {
+            margin-top: 24px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        @media (max-width:600px){
+            body { padding: 36px 18px; }
+            h1 { font-size: 28px; }
+            .scroll-down { font-size: 40px; margin: 20px 0; }
+            .letter { padding: 20px; font-size: 16px; margin-top: 8vh; }
+        }
+    </style>
+</head>
+<body>
+    <h1>To the One I Love</h1>
+
+    <div class="scroll-down" title="Scroll to letter" onclick="document.getElementById('letter').scrollIntoView({behavior:'smooth'});">↓</div>
+
+    <article id="letter" class="letter" aria-live="polite">
+        <p>My Dearest,</p>
+
+        <p>I want to tell you how deeply sorry I am. From the bottom of my heart, I hope you can feel the sincerity in these words. You are the kindest, most beautiful part of my life — the one who makes ordinary days feel extraordinary.</p>
+
+        <p>Your laughter is my favorite sound, your strength inspires me, and your warmth is where I find peace. I cherish every moment with you and I am forever grateful for the love we share.</p>
+
+        <p>Please accept this apology as the promise that I will always try to be better for you, to protect the tenderness between us, and to honor the trust you place in me. My love for you is steady and true, today and always.</p>
+
+        <p class="signature">With all my love,<br>Aarav Sharma</p>
+    </article>
+
+    <footer>— Thank you for reading</footer>
+
+    <script>
+        // Fade letter in when it enters viewport
+        (function(){
+            const target = document.getElementById('letter');
+            if (!('IntersectionObserver' in window)) {
+                // Fallback: make visible immediately
+                target.classList.add('visible');
+                return;
+            }
+            const io = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        target.classList.add('visible');
+                        obs.disconnect();
+                    }
+                });
+            }, { threshold: 0.18 });
+            io.observe(target);
+        })();
+    </script>
+</body>
+</html>
+"""
+
+file_name = "apology_letter_aarav_sharma.html"
+with open(file_name, "w", encoding="utf-8") as f:
+    f.write(html_code)
+
+webbrowser.open('file://' + os.path.realpath(file_name))
