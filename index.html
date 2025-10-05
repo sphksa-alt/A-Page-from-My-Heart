@@ -129,6 +129,24 @@ body {
     <footer>— Thank you for reading</footer>
     <img src="images/cat-heart.png" alt="Cute cat" width="400">
 
+    <style>
+img[alt="Cute cat"] {
+  display: block;
+  margin: 40px auto;
+  filter: drop-shadow(0 0 15px rgba(255, 105, 180, 0.7));
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+</style>
+
     <script>
         (function(){
             const target = document.getElementById('letter');
