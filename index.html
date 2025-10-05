@@ -130,22 +130,34 @@ body {
     <img src="images/cat-heart.png" alt="Cute cat" width="300" id="cat-image">
 
     <style>
-img[alt="Cute cat"] {
-  display: block;
-  margin: 40px auto;
-  filter: drop-shadow(0 0 15px rgba(255, 105, 180, 0.7));
-  animation: float 3s ease-in-out infinite;
-}
+  /* Style for the floating transparent cat image */
+  #cat-image {
+    display: block;
+    margin: 40px auto;
+    width: 250px;
+    animation: float 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 15px rgba(255, 182, 193, 0.6));
+  }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
   }
-  50% {
-    transform: translateY(-10px);
-  }
-}
 </style>
+
+<script>
+  (function(){
+    const target = document.getElementById('letter');
+    if (!('IntersectionObserver' in window)) {
+      target.classList.add('visible');
+      return;
+    }
+  })();
+</script>
 
     <script>
         (function(){
